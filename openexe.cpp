@@ -18,15 +18,15 @@ int main() {
 	TCHAR findkeyname[MAX_PATH] = {0};
 	BYTE  key_vle[MAX_PATH] = {0};
 	CHAR openfilenamebuffer[MAX_PATH];
-	CHAR openlinkpath[MAX_PATH];
+	CHAR openlinktruepath[MAX_PATH];
 	BOOL find = findRegKey(rootHkey , child , "Desktop" , findkeyname, key_vle);
 	if (find) {
 		printf("取到的子项为: %s\n" , findkeyname);
 		if (Open_dir((LPTSTR)key_vle , "OBS Studio.lnk" , openfilenamebuffer)) {
 			//如果找到就变为绝对路径
 			printf("在子项桌面中查找 Obs Studio.lnk ---- %s \n" , openfilenamebuffer);
-			if (SUCCEEDED(ResolveIt(NULL , openfilenamebuffer , openlinkpath , MAX_PATH))) {
-				printf("找到真实地址为  %s \n" , openlinkpath);
+			if (SUCCEEDED(ResolveIt(NULL , openfilenamebuffer , openlinktruepath , MAX_PATH))) {
+				printf("找到真实地址为  %s \n" , openlinktruepath);
 			}
 		}
 	}
