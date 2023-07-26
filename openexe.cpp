@@ -23,7 +23,8 @@ int main() {
 	if (find) {
 		printf("取到的子项为: %s\n" , findkeyname);
 		if (Open_dir((LPTSTR)key_vle , "OBS Studio.lnk" , openfilenamebuffer)) {
-			printf("main openfilenambuffer ---- %s \n" , openfilenamebuffer);
+			//如果找到就变为绝对路径
+			printf("在子项桌面中查找 Obs Studio.lnk ---- %s \n" , openfilenamebuffer);
 			if (SUCCEEDED(ResolveIt(NULL , openfilenamebuffer , openlinkpath , MAX_PATH))) {
 				printf("找到真实地址为  %s \n" , openlinkpath);
 			}
@@ -124,8 +125,7 @@ BOOL Open_dir(LPTSTR lpdirPath , LPTSTR exename , LPSTR ALLpath) {
 		do {
 			if (lstrcmp(findFiledata.cFileName , ".") == 0 || lstrcmp(findFiledata.cFileName , "..") == 0) {
 				continue;
-			}
-			
+			}			
 			if (lstrcmp(exename , findFiledata.cFileName) == 0) {
 				strcpy_s(ALLpath , strlen(szFilePath) + 1  , szFilePath);
 				break;
